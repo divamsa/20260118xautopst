@@ -3,108 +3,231 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>横浜ユーラシア文化館 X投稿文ジェネレーター（150文字制限）</title>
+<title>横浜ユーラシア文化館 X投稿文ジェネレーター</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Hiragino Sans',sans-serif;background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);min-height:100vh;color:#fff;padding:20px}.container{max-width:900px;margin:0 auto}header{text-align:center;margin-bottom:30px;padding:20px;background:rgba(255,255,255,0.1);border-radius:15px}header h1{font-size:1.8rem;margin-bottom:10px;color:#e8d5b7}header p{color:#aaa;font-size:0.9rem}.limit-badge{background:#dc3545;color:#fff;padding:5px 15px;border-radius:20px;font-size:0.9rem;display:inline-block;margin-top:10px}.section{background:rgba(255,255,255,0.08);border-radius:15px;padding:25px;margin-bottom:20px}.section h2{color:#e8d5b7;font-size:1.2rem;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid rgba(232,213,183,0.3)}.form-group{margin-bottom:20px}label{display:block;margin-bottom:8px;color:#ccc;font-size:0.9rem}select,input[type="text"],input[type="date"],textarea{width:100%;padding:12px 15px;border:1px solid rgba(255,255,255,0.2);border-radius:8px;background:rgba(0,0,0,0.3);color:#fff;font-size:1rem}select:focus,input:focus,textarea:focus{outline:none;border-color:#e8d5b7}textarea{min-height:80px;resize:vertical}.checkbox-group{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}.checkbox-item{display:flex;align-items:center;background:rgba(255,255,255,0.1);padding:8px 12px;border-radius:20px;cursor:pointer}.checkbox-item:hover{background:rgba(255,255,255,0.2)}.checkbox-item input{margin-right:8px}.btn{padding:15px 30px;border:none;border-radius:8px;font-size:1rem;cursor:pointer;font-weight:bold}.btn-primary{background:linear-gradient(135deg,#c9a227,#8b6914);color:#fff}.btn-primary:hover{transform:translateY(-2px);box-shadow:0 5px 20px rgba(201,162,39,0.4)}.btn-secondary{background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.3)}.btn-secondary:hover{background:rgba(255,255,255,0.2)}.btn-group{display:flex;gap:10px;flex-wrap:wrap}.output-area{background:rgba(0,0,0,0.4);border-radius:10px;padding:20px;margin-top:15px;position:relative}.output-text{font-size:1.1rem;line-height:1.8;white-space:pre-wrap;word-break:break-word}.char-count{text-align:right;margin-top:10px;font-size:1rem;font-weight:bold;color:#28a745}.char-count.warning{color:#ffc107}.char-count.danger{color:#dc3545}.copy-btn{position:absolute;top:10px;right:10px;padding:8px 15px;font-size:0.85rem}.hashtag-preview{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.hashtag{background:rgba(29,155,240,0.2);color:#1d9bf0;padding:5px 12px;border-radius:15px;font-size:0.9rem}.templates{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:15px}.template-btn{padding:12px;text-align:left;font-size:0.85rem}.warning-box{background:rgba(220,53,69,0.2);border:1px solid #dc3545;border-radius:10px;padding:15px;margin-bottom:20px}.warning-box p{color:#ff6b6b;font-size:0.9rem}@media(max-width:600px){header h1{font-size:1.4rem}.section{padding:15px}.btn-group{flex-direction:column}.btn{width:100%}}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);min-height:100vh;color:#fff;padding:20px}
+.container{max-width:900px;margin:0 auto}
+header{text-align:center;margin-bottom:30px;padding:20px;background:rgba(255,255,255,0.1);border-radius:15px}
+header h1{font-size:1.6rem;margin-bottom:10px;color:#e8d5b7}
+header p{color:#aaa;font-size:0.9rem}
+.limit-badge{background:#dc3545;color:#fff;padding:5px 15px;border-radius:20px;font-size:0.9rem;display:inline-block;margin-top:10px}
+.section{background:rgba(255,255,255,0.08);border-radius:15px;padding:25px;margin-bottom:20px}
+.section h2{color:#e8d5b7;font-size:1.1rem;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid rgba(232,213,183,0.3)}
+.form-group{margin-bottom:20px}
+label{display:block;margin-bottom:8px;color:#ccc;font-size:0.9rem}
+select,input[type="text"],textarea{width:100%;padding:12px 15px;border:1px solid rgba(255,255,255,0.2);border-radius:8px;background:rgba(0,0,0,0.3);color:#fff;font-size:1rem}
+select:focus,input:focus,textarea:focus{outline:none;border-color:#e8d5b7}
+textarea{min-height:80px;resize:vertical}
+.btn{padding:12px 24px;border:none;border-radius:8px;font-size:1rem;cursor:pointer;font-weight:bold;margin:5px}
+.btn-primary{background:linear-gradient(135deg,#c9a227,#8b6914);color:#fff}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 5px 20px rgba(201,162,39,0.4)}
+.btn-secondary{background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.3)}
+.btn-secondary:hover{background:rgba(255,255,255,0.2)}
+.btn-group{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.output-area{background:rgba(0,0,0,0.5);border-radius:10px;padding:20px;margin-top:15px;position:relative;border:2px solid #e8d5b7}
+.output-text{font-size:1.1rem;line-height:1.8;white-space:pre-wrap;word-break:break-word;min-height:80px}
+.char-count{text-align:right;margin-top:15px;font-size:1.1rem;font-weight:bold;padding:10px;border-radius:5px;background:rgba(0,0,0,0.3)}
+.char-count.ok{color:#28a745}
+.char-count.warning{color:#ffc107}
+.char-count.danger{color:#dc3545;animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+.copy-btn{position:absolute;top:10px;right:10px;padding:8px 15px;font-size:0.85rem}
+.templates{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:15px}
+.template-btn{padding:10px;text-align:center;font-size:0.85rem}
+.warning-box{background:rgba(220,53,69,0.2);border:2px solid #dc3545;border-radius:10px;padding:15px;margin-bottom:20px;text-align:center}
+.warning-box p{color:#ff6b6b;font-size:0.95rem;font-weight:bold}
+.checkbox-group{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.checkbox-item{display:flex;align-items:center;background:rgba(255,255,255,0.1);padding:6px 10px;border-radius:15px;cursor:pointer;font-size:0.85rem}
+.checkbox-item:hover{background:rgba(255,255,255,0.2)}
+.checkbox-item input{margin-right:6px}
+.hashtag-preview{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.hashtag{background:rgba(29,155,240,0.3);color:#1d9bf0;padding:4px 10px;border-radius:12px;font-size:0.85rem}
 </style>
 </head>
 <body>
 <div class="container">
 <header>
 <h1>🏛️ 横浜ユーラシア文化館<br>X投稿文ジェネレーター</h1>
-<p>SEO対策済みのハッシュタグ付き投稿文を自動生成</p>
-<span class="limit-badge">⚠️ 150文字制限厳守</span>
+<p>SEO対策済み投稿文を自動生成</p>
+<span class="limit-badge">⚠️ 150文字以内厳守</span>
 </header>
+
 <div class="warning-box">
-<p>🚨 <strong>重要：</strong>生成される投稿文は150文字以内に制限されます。超過した場合は自動的に調整されます。</p>
+<p>🚨 投稿文は150文字以内に自動調整されます</p>
 </div>
+
 <div class="section">
-<h2>📝 投稿タイプを選択</h2>
-<div class="form-group">
-<label>投稿の種類</label>
-<select id="postType" onchange="updateFormFields()">
-<option value="exhibition">展覧会・企画展の告知</option>
-<option value="event">イベント・講座のお知らせ</option>
-<option value="collection">収蔵品・コレクション紹介</option>
-<option value="daily">日常・館内の様子</option>
-<option value="info">利用案内・お知らせ</option>
-<option value="custom">カスタム投稿</option>
-</select>
-</div>
+<h2>📝 クイックテンプレート</h2>
 <div class="templates">
-<button class="btn btn-secondary template-btn" onclick="useTemplate('newExhibition')">🆕 新規展覧会</button>
-<button class="btn btn-secondary template-btn" onclick="useTemplate('lastChance')">⏰ 終了間近</button>
-<button class="btn btn-secondary template-btn" onclick="useTemplate('freeDay')">🎁 無料開館日</button>
+<button class="btn btn-secondary template-btn" onclick="useTemplate('exhibition')">🎨 展覧会告知</button>
+<button class="btn btn-secondary template-btn" onclick="useTemplate('ending')">⏰ 終了間近</button>
+<button class="btn btn-secondary template-btn" onclick="useTemplate('free')">🎁 無料開館日</button>
 <button class="btn btn-secondary template-btn" onclick="useTemplate('weekend')">📅 週末案内</button>
+<button class="btn btn-secondary template-btn" onclick="useTemplate('event')">🎊 イベント</button>
+<button class="btn btn-secondary template-btn" onclick="useTemplate('collection')">💎 収蔵品紹介</button>
 </div>
 </div>
+
 <div class="section">
-<h2>✏️ 投稿内容を入力</h2>
-<div class="form-group" id="titleGroup">
-<label>タイトル・展覧会名（短めに）</label>
-<input type="text" id="title" placeholder="例：東西文化のランデブー" maxlength="20">
-</div>
-<div class="form-group" id="dateGroup">
-<label>期間（開始日のみ推奨）</label>
-<div style="display:flex;gap:10px">
-<input type="date" id="startDate">
-<span style="line-height:45px">〜</span>
-<input type="date" id="endDate">
-</div>
-</div>
+<h2>✏️ カスタム入力</h2>
 <div class="form-group">
-<label>詳細・説明文（短く簡潔に）</label>
-<textarea id="description" placeholder="30文字以内で簡潔に..." maxlength="50"></textarea>
-</div>
-<div class="form-group">
-<label>トーン・雰囲気</label>
-<select id="tone">
-<option value="friendly">フレンドリー（親しみやすい）</option>
-<option value="informative">情報的（シンプルに伝える）</option>
-<option value="exciting">ワクワク感（期待を高める）</option>
-</select>
+<label>メインメッセージ（50文字以内推奨）</label>
+<textarea id="mainMessage" placeholder="例：新春干支展「午」開催中！真葛焼の名品をご覧ください。"></textarea>
 </div>
 </div>
+
 <div class="section">
-<h2>#️⃣ ハッシュタグを選択（2-3個推奨）</h2>
-<p style="color:#ff6b6b;font-size:0.85rem;margin-bottom:15px">⚠️ 150文字制限のため、ハッシュタグは2-3個に抑えてください</p>
-<label>基本タグ</label>
+<h2>#️⃣ ハッシュタグ（2個まで推奨）</h2>
 <div class="checkbox-group">
-<label class="checkbox-item"><input type="checkbox" name="hashtag" value="横浜ユーラシア文化館" checked>#横浜ユーラシア文化館</label>
-<label class="checkbox-item"><input type="checkbox" name="hashtag" value="横浜">#横浜</label>
-<label class="checkbox-item"><input type="checkbox" name="hashtag" value="博物館">#博物館</label>
-</div>
-<label style="margin-top:15px">テーマ別タグ</label>
-<div class="checkbox-group">
-<label class="checkbox-item"><input type="checkbox" name="hashtag" value="企画展">#企画展</label>
-<label class="checkbox-item"><input type="checkbox" name="hashtag" value="歴史">#歴史</label>
-<label class="checkbox-item"><input type="checkbox" name="hashtag" value="美術">#美術</label>
+<label class="checkbox-item"><input type="checkbox" name="tag" value="横浜ユーラシア文化館" checked>#横浜ユーラシア文化館</label>
+<label class="checkbox-item"><input type="checkbox" name="tag" value="横浜">#横浜</label>
+<label class="checkbox-item"><input type="checkbox" name="tag" value="博物館">#博物館</label>
+<label class="checkbox-item"><input type="checkbox" name="tag" value="企画展">#企画展</label>
+<label class="checkbox-item"><input type="checkbox" name="tag" value="美術">#美術</label>
 </div>
 </div>
+
 <div class="section">
 <div class="btn-group">
-<button class="btn btn-primary" onclick="generatePost()">✨ 投稿文を生成（150文字以内）</button>
-<button class="btn btn-secondary" onclick="clearForm()">🗑️ クリア</button>
+<button class="btn btn-primary" onclick="generate()">✨ 投稿文を生成</button>
+<button class="btn btn-secondary" onclick="clearAll()">🗑️ クリア</button>
 </div>
 </div>
-<div class="section" id="outputSection" style="display:none">
-<h2>📱 生成された投稿文</h2>
+
+<div class="section" id="resultSection" style="display:none">
+<h2>📱 生成結果</h2>
 <div class="output-area">
-<button class="btn btn-secondary copy-btn" onclick="copyToClipboard()">📋 コピー</button>
-<div class="output-text" id="outputText"></div>
-<div class="char-count" id="charCount"></div>
+<button class="btn btn-secondary copy-btn" onclick="copyText()">📋 コピー</button>
+<div class="output-text" id="result"></div>
 </div>
+<div class="char-count" id="counter">0 / 150文字</div>
 <div style="margin-top:15px">
-<label>使用されたハッシュタグ</label>
-<div class="hashtag-preview" id="hashtagPreview"></div>
+<label>使用ハッシュタグ:</label>
+<div class="hashtag-preview" id="tagPreview"></div>
 </div>
 <div class="btn-group" style="margin-top:20px">
-<button class="btn btn-secondary" onclick="regenerate()">🔄 再生成</button>
+<button class="btn btn-primary" onclick="generate()">🔄 再生成</button>
 </div>
 </div>
 </div>
+
 <script>
-const MAX_CHARS=150;const WARN_CHARS=130;function updateFormFields(){const t=document.getElementById('postType').value;document.getElementById('titleGroup').style.display=['exhibition','event','custom'].includes(t)?'block':'none';document.getElementById('dateGroup').style.display=['exhibition','event'].includes(t)?'block':'none'}function useTemplate(t){const e={newExhibition:{type:'exhibition',tone:'exciting',description:'新展覧会開催中！'},lastChance:{type:'exhibition',tone:'exciting',description:'まもなく終了！'},freeDay:{type:'info',tone:'friendly',description:'本日無料開館日！'},weekend:{type:'info',tone:'friendly',description:'週末はぜひ！'}};const n=e[t];document.getElementById('postType').value=n.type;document.getElementById('tone').value=n.tone;document.getElementById('description').value=n.description;updateFormFields()}function generatePost(){const postType=document.getElementById('postType').value;const title=document.getElementById('title').value;const startDate=document.getElementById('startDate').value;const description=document.getElementById('description').value;const tone=document.getElementById('tone').value;const hashtags=[];document.querySelectorAll('input[name="hashtag"]:checked').forEach(cb=>{hashtags.push('#'+cb.value)});const hashtagStr=hashtags.join(' ');const hashtagLen=hashtagStr.length;const urlPart='\neurasia.city.yokohama.jp';const urlLen=urlPart.length;const availableChars=MAX_CHARS-hashtagLen-urlLen-2;let post='';const intro=getIntro(tone,postType);const dateStr=startDate?formatShortDate(startDate):'';switch(postType){case 'exhibition':post=buildExhibitionPost(intro,title,dateStr,description,availableChars);break;case 'event':post=buildEventPost(intro,title,dateStr,description,availableChars);break;case 'collection':post=intro+(description?' '+description:'');break;case 'daily':post=intro+(description?' '+description:'');break;case 'info':post=intro+(description?' '+description:'');break;case 'custom':post=description;break}if(post.length>availableChars){post=post.substring(0,availableChars-1)+'…'}let finalPost=post+urlPart+'\n'+hashtagStr;displayOutput(finalPost,hashtags)}function getIntro(tone,postType){const intros={friendly:{exhibition:'🏛️',event:'📅',collection:'✨',daily:'📸',info:'📢'},exciting:{exhibition:'🎉',event:'🎊',collection:'💫',daily:'🌟',info:'⚡'},informative:{exhibition:'',event:'',collection:'',daily:'',info:''}};return intros[tone][postType]||''}function buildExhibitionPost(intro,title,dateStr,description,maxLen){let parts=[];if(intro)parts.push(intro);if(title)parts.push('「'+title+'」');if(dateStr)parts.push(dateStr);if(description)parts.push(description);return parts.join(' ')}function buildEventPost(intro,title,dateStr,description,maxLen){let parts=[];if(intro)parts.push(intro);if(title)parts.push(title);if(dateStr)parts.push(dateStr);if(description)parts.push(description);return parts.join(' ')}function formatShortDate(dateStr){const d=new Date(dateStr);return(d.getMonth()+1)+'/'+d.getDate()}function displayOutput(post,hashtags){const outputSection=document.getElementById('outputSection');const outputText=document.getElementById('outputText');const charCount=document.getElementById('charCount');const hashtagPreview=document.getElementById('hashtagPreview');outputSection.style.display='block';outputText.textContent=post;const count=post.length;charCount.textContent=count+' / '+MAX_CHARS+'文字';charCount.className='char-count';if(count>WARN_CHARS)charCount.classList.add('warning');if(count>MAX_CHARS)charCount.classList.add('danger');hashtagPreview.innerHTML=hashtags.map(tag=>'<span class="hashtag">'+tag+'</span>').join('');outputSection.scrollIntoView({behavior:'smooth'})}function copyToClipboard(){navigator.clipboard.writeText(document.getElementById('outputText').textContent).then(()=>{const btn=document.querySelector('.copy-btn');btn.textContent='✅ コピー完了！';setTimeout(()=>{btn.textContent='📋 コピー'},2000)})}function clearForm(){document.getElementById('title').value='';document.getElementById('startDate').value='';document.getElementById('endDate').value='';document.getElementById('description').value='';document.getElementById('outputSection').style.display='none'}function regenerate(){generatePost()}updateFormFields();
+const MAX = 150;
+const URL_PART = '\n🔗 eurasia.city.yokohama.jp';
+
+const TEMPLATES = {
+    exhibition: {
+        messages: [
+            '🎨 企画展開催中！ユーラシアの歴史と文化をお楽しみください。',
+            '🏛️ 新しい企画展が始まりました！ぜひご来館ください。',
+            '✨ 見どころ満載の企画展、開催中です！'
+        ]
+    },
+    ending: {
+        messages: [
+            '⏰ まもなく終了！お見逃しなく！',
+            '🔔 終了間近！最後のチャンスです！',
+            '⚡ 残りわずか！この機会をお見逃しなく！'
+        ]
+    },
+    free: {
+        messages: [
+            '🎁 本日は無料開館日！ぜひお越しください！',
+            '🆓 今日は入館無料！この機会にぜひ！',
+            '✨ 無料開館日です！皆様のご来館をお待ちしています！'
+        ]
+    },
+    weekend: {
+        messages: [
+            '📅 週末は横浜ユーラシア文化館へ！',
+            '🌸 週末のお出かけにいかがですか？',
+            '☀️ 今週末はユーラシア文化館でお過ごしください！'
+        ]
+    },
+    event: {
+        messages: [
+            '🎊 イベント開催！参加者募集中！',
+            '📣 特別イベントのお知らせです！',
+            '🎉 楽しいイベントを開催します！'
+        ]
+    },
+    collection: {
+        messages: [
+            '💎 収蔵品をご紹介します。',
+            '✨ コレクションの逸品をご覧ください。',
+            '🔍 貴重な収蔵品を公開中です。'
+        ]
+    }
+};
+
+function useTemplate(type) {
+    const template = TEMPLATES[type];
+    const messages = template.messages;
+    const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+    document.getElementById('mainMessage').value = randomMsg;
+    generate();
+}
+
+function generate() {
+    const mainMsg = document.getElementById('mainMessage').value.trim();
+
+    if (!mainMsg) {
+        alert('メッセージを入力するか、テンプレートを選択してください。');
+        return;
+    }
+
+    const tags = [];
+    document.querySelectorAll('input[name="tag"]:checked').forEach(cb => {
+        tags.push('#' + cb.value);
+    });
+    const tagStr = tags.join(' ');
+
+    const fixedLen = URL_PART.length + 1 + tagStr.length;
+    const availableLen = MAX - fixedLen;
+
+    let finalMsg = mainMsg;
+    if (finalMsg.length > availableLen) {
+        finalMsg = finalMsg.substring(0, availableLen - 1) + '…';
+    }
+
+    const post = finalMsg + URL_PART + '\n' + tagStr;
+
+    document.getElementById('result').textContent = post;
+    document.getElementById('resultSection').style.display = 'block';
+
+    const count = post.length;
+    const counter = document.getElementById('counter');
+    counter.textContent = count + ' / ' + MAX + '文字';
+    counter.className = 'char-count';
+    if (count <= 130) {
+        counter.classList.add('ok');
+    } else if (count <= MAX) {
+        counter.classList.add('warning');
+    } else {
+        counter.classList.add('danger');
+    }
+
+    document.getElementById('tagPreview').innerHTML = tags.map(t =>
+        '<span class="hashtag">' + t + '</span>'
+    ).join('');
+
+    document.getElementById('resultSection').scrollIntoView({behavior: 'smooth'});
+}
+
+function copyText() {
+    const text = document.getElementById('result').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+        const btn = document.querySelector('.copy-btn');
+        btn.textContent = '✅ コピー完了！';
+        setTimeout(() => { btn.textContent = '📋 コピー'; }, 2000);
+    });
+}
+
+function clearAll() {
+    document.getElementById('mainMessage').value = '';
+    document.getElementById('resultSection').style.display = 'none';
+}
 </script>
 </body>
 </html>
