@@ -26,13 +26,13 @@ textarea{min-height:60px;resize:vertical}
 .btn-secondary:hover{background:rgba(255,255,255,0.2)}
 .btn-danger{background:#dc3545;color:#fff}
 .btn-group{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
-.output-area{background:rgba(0,0,0,0.5);border-radius:10px;padding:20px;margin-top:15px;position:relative;border:2px solid #28a745}
-.output-text{font-size:1.1rem;line-height:1.8;white-space:pre-wrap;word-break:break-word;min-height:100px}
+.output-area{background:rgba(0,0,0,0.5);border-radius:10px;padding:20px;margin-top:15px;border:2px solid #28a745}
+.output-text{width:100%;min-height:120px;font-size:1.1rem;line-height:1.8;background:transparent;border:none;color:#fff;resize:vertical;font-family:inherit}
+.output-text:focus{outline:none}
 .char-count{text-align:right;margin-top:15px;font-size:1.2rem;font-weight:bold;padding:10px;border-radius:5px;background:rgba(0,0,0,0.3)}
 .char-count.ok{color:#28a745}
 .char-count.warning{color:#ffc107}
 .char-count.danger{color:#dc3545}
-.copy-btn{position:absolute;top:10px;right:10px;padding:8px 15px;font-size:0.85rem}
 .templates{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:15px}
 .template-btn{padding:12px;text-align:center;font-size:0.9rem}
 .checkbox-group{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
@@ -63,6 +63,7 @@ textarea{min-height:60px;resize:vertical}
 .custom-section h2{color:#aaa}
 .custom-header{display:flex;justify-content:space-between;align-items:center}
 .optional-badge{background:rgba(255,255,255,0.2);color:#aaa;padding:3px 10px;border-radius:10px;font-size:0.75rem}
+.edit-hint{color:#888;font-size:0.8rem;margin-top:5px}
 </style>
 </head>
 <body>
@@ -134,9 +135,9 @@ textarea{min-height:60px;resize:vertical}
 <div class="section" id="resultSection" style="display:none">
 <h2>📱 生成結果</h2>
 <div class="output-area">
-<button class="btn btn-secondary copy-btn" onclick="copyText()">📋 コピー</button>
-<div class="output-text" id="result"></div>
+<textarea class="output-text" id="result" oninput="updateCharCount()"></textarea>
 </div>
+<p class="edit-hint">✏️ 上のテキストは直接編集できます</p>
 <div class="char-count" id="counter">0 / 150文字</div>
 <div style="margin-top:15px">
 <label>使用ハッシュタグ:</label>
@@ -461,20 +462,10 @@ function autoGenerate() {
 
     currentPost = body + fixedParts;
 
-    document.getElementById('result').textContent = currentPost;
+    document.getElementById('result').value = currentPost;
     document.getElementById('resultSection').style.display = 'block';
 
-    const count = currentPost.length;
-    const counter = document.getElementById('counter');
-    counter.textContent = count + ' / ' + MAX + '文字';
-    counter.className = 'char-count';
-    if (count >= 140) {
-        counter.classList.add('ok');
-    } else if (count >= 120) {
-        counter.classList.add('warning');
-    } else {
-        counter.classList.add('danger');
-    }
+    updateCharCount();
 
     document.getElementById('tagPreview').innerHTML = tags.map(t =>
         '<span class="hashtag">' + t + '</span>'
@@ -483,11 +474,25 @@ function autoGenerate() {
     document.getElementById('resultSection').scrollIntoView({behavior: 'smooth'});
 }
 
+function updateCharCount() {
+    const text = document.getElementById('result').value;
+    currentPost = text;
+    const count = text.length;
+    const counter = document.getElementById('counter');
+    counter.textContent = count + ' / ' + MAX + '文字';
+    counter.className = 'char-count';
+    if (count >= 140 && count <= MAX) {
+        counter.classList.add('ok');
+    } else if (count > MAX) {
+        counter.classList.add('danger');
+    } else if (count >= 120) {
+        counter.classList.add('warning');
+    }
+}
+
 function copyText() {
     navigator.clipboard.writeText(currentPost).then(() => {
-        const btn = document.querySelector('.copy-btn');
-        btn.textContent = '✅ コピー完了！';
-        setTimeout(() => { btn.textContent = '📋 コピー'; }, 2000);
+        alert('コピーしました！');
         saveToHistory();
     });
 }
